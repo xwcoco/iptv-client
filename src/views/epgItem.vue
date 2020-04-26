@@ -60,6 +60,7 @@
 
 <script>
     import epgSourceEdit from "@/views/epgSourceEdit";
+    import EpgSources from "../epgSource";
     import axios from  "axios";
     export default {
         name: "epgItem",
@@ -73,14 +74,7 @@
                 editRemarks : "",
                 editId : -1,
                 source : "",
-                sourceOptions : [{
-                    value: '51zmt',
-                    label: '51zmt'
-                },{
-                    value: 'tvmao',
-                    label: '电视猫',
-                }],
-
+                sourceOptions : EpgSources,
             }
         },
         mounted() {

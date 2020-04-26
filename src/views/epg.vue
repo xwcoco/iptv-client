@@ -34,6 +34,7 @@
 
 <script>
     import axios from "axios";
+    import EpgSources from "../epgSource";
     export default {
         name: "epg",
         data() {
@@ -53,15 +54,23 @@
         methods : {
             contentFormatter(row) {
                 // console.log(row);
-                let obj = JSON.parse(row.content);
-                if (!obj) return "";
-                let s = "";
-                for (let i = 0; i < obj.length; i++) {
-                    s = s + obj[i].pname + ",";
+                try {
+                    let obj = JSON.parse(row.content);
+                    if (!obj) return "";
+
+                    let s = "";
+                    for (let i = 0; i < obj.length; i++) {
+                        s = s + obj[i].pname + ",";
+                    }
+                    if (s.length > 0)
+                        s = s.substr(0,s.length - 1);
+                    return s;
                 }
-                if (s.length > 0)
-                    s = s.substr(0,s.length - 1);
-                return s;
+                catch (e) {
+                    return row.content;
+                }
+
+
             },
             sourceFormatter(row) {
                 let name = row.name;
@@ -69,15 +78,20 @@
                 if (index === -1)
                     return "未知";
                 let tmp = name.substr(0,index);
-                switch (tmp) {
-                    case "51zmt" :
-                        return "51zmt";
-                    case "tvmao":
-                        return "电视猫";
-                    default:
-                        return "未知";
-
+                for (let i = 0; i < EpgSources.length; i++) {
+                    if (tmp === EpgSources[i].value)
+                        return EpgSources[i].label;
                 }
+                return "未知";
+                // switch (tmp) {
+                //     case "51zmt" :
+                //         return "51zmt";
+                //     case "tvmao":
+                //         return "电视猫";
+                //     default:
+                //         return "未知";
+                //
+                // }
             },
             handleEdit(index,row) {
                 let id = row.id;

@@ -70,6 +70,7 @@
                     </el-button-group>
                     <el-button-group>
                         <el-button size="small" type="warning" v-on:click="read51zmt">读取51zmt节目单</el-button>
+                        <el-button size="small" type="success" v-on:click="autoMatch">自动智能对应</el-button>
                     </el-button-group>
                 </el-col>
 
@@ -240,7 +241,49 @@
             setSourceData(data) {
                 this.bindlist = JSON.parse(data);
                 if (!this.bindlist) this.bindlist = [];
-            }
+            },
+
+            findInBindList(name) {
+                for (let i = 0; i < this.bindlist.length; i++) {
+                    if (this.bindlist[i].pname === name)
+                        return true;
+                }
+                return false;
+            },
+            searchIn51zmt(name) {
+                for (let i = 0; i < this.all51list.length; i++) {
+                    let t = this.all51list[i];
+                    if (t.name === name)
+                        return t;
+                }
+                for (let i = 0; i < this.all51list.length; i++) {
+                    let t = this.all51list[i];
+                    if (t.name.substr(0,name.length) === name)
+                        return t;
+                }
+                return null;
+            },
+            autoMatch() {
+                for (let i = 0; i < this.alllist.length; i++) {
+                    let p = this.alllist[i];
+                    console.log(p);
+                    if (this.findInBindList(p.name))
+                        continue;
+
+                    let searched = this.searchIn51zmt(p.name);
+                    if (searched) {
+                        let obj = {
+                            pname: p.name,
+                            pcate: p.category,
+                            ecate: searched.category,
+                            ename: searched.name,
+                            etvid: searched.tvid,
+                        };
+                        this.bindlist.push(obj);
+
+                    }
+                }
+            },
         }
     }
 </script>

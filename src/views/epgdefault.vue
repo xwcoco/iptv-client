@@ -82,9 +82,14 @@
                 return JSON.stringify(sels);
             },
             setSourceData(data) {
-                this.checkedData = JSON.parse(data);
-                if (!this.checkedData)
-                    this.checkedData = [];
+                try {
+                    this.checkedData = JSON.parse(data);
+                    if (!this.checkedData)
+                        this.checkedData = [];
+                }
+                catch (e) {
+                    return;
+                }
                 // console.log(sels);
                 // if (sels instanceof Array) {
                 //     for (let i = 0; i < sels.length; i++) {

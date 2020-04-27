@@ -110,7 +110,7 @@
                 }
                 let data = this.$refs.epgsource.getSourceData();
 
-                axios.get('/epg/saveepgitem',{params:{
+                axios.post('/epg/saveepgitem',{params:{
                         id : this.editId,
                         name : this.editName,
                         remarks : this.editRemarks,

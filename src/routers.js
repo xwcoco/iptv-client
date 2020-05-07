@@ -24,7 +24,18 @@ const routes = [
         name: 'epgitem',
         props: true,
         component: () => import('./views/epgItem.vue')
-    }
+    },
+    {
+        path: '/icon',
+        name: 'icon',
+        component: () => import('./views/icon.vue')
+    },
+    {
+        path: '/icon/item/:id',
+        name: 'iconitem',
+        props: true,
+        component: () => import('./views/iconItem.vue')
+    },
 ]
 
 const router = new VueRouter({

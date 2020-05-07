@@ -143,7 +143,7 @@
                 this.programes = [];
                 for (let i = 0; i < this.alllist.length; i++) {
                     let item = this.alllist[i];
-                    if (item.category === newValue) {
+                    if ((item.category === newValue) && (this.programes.indexOf(item.name) === -1)) {
                         this.programes.push(item.name);
                     }
                 }

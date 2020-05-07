@@ -16,6 +16,7 @@
                             <template slot="title"><i class="el-icon-menu"></i>节目管理</template>
                             <el-menu-item index="2-1" route="/category">节目管理</el-menu-item>
                             <el-menu-item index="2-2" route="/epg">EPG管理</el-menu-item>
+                            <el-menu-item index="2-3" route="/icon">图标管理</el-menu-item>
                         </el-submenu>
                     </el-menu>
                 </el-aside>

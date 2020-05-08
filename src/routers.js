@@ -36,6 +36,11 @@ const routes = [
         props: true,
         component: () => import('./views/iconItem.vue')
     },
+    {
+        path: '/iconMultiEdit',
+        name: 'iconMultiEdit',
+        component: () => import('./views/iconMultiEdit.vue')
+    },
 ]
 
 const router = new VueRouter({
